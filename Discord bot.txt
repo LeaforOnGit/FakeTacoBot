@@ -1,0 +1,14 @@
+Discord bot:
+
+Taco bot
+each user has X tacos per day
+each user can give tacos to other users 
+	by sending a message in the server 
+	with the taco emoji and the receiver user @
+the bot should keep track of the tacos of each user
+
+
+trying to send a taco to multiple people at the same time
+	should have some kind of "protection" 
+	maybe ask for confirmation?
+Taco shop?
