@@ -1,7 +1,8 @@
-import { addTaco } from "../database/operations/addTaco.js";
-import { saveTacoMessage } from "../database/operations/saveTacoMessage.js";
+import { Message } from "discord.js";
+import { addTaco } from "../database/operations/addTaco";
+import { saveTacoMessage } from "../database/operations/saveTacoMessage";
 
-export const onMessageCreate = async (message) =>{
+export const onMessageCreate = async (message: Message<boolean>) =>{
 
     //No tacos here sadge 
     if(!message.content.includes('🌮')){
@@ -17,7 +18,7 @@ export const onMessageCreate = async (message) =>{
 
     const userMentioned = message.mentions.users.keys().next().value;
 
-    if(addTaco(userMentioned, message.author.id)){
+    if(await addTaco(userMentioned, message.author.id)){
         saveTacoMessage(message.content, userMentioned, message.author.id);
     }
 

@@ -1,8 +1,6 @@
-import { TacoCounter } from "../models/tacoCounter.js";
+import { TacoCounter } from "../models/tacoCounter";
 
-const DAILY_TACO_LIMIT = 4;
-
-function isToday(date) {
+function isToday(date: Date) {
     const today = new Date();
     
     return date.getDate() === today.getDate() &&
@@ -10,7 +8,7 @@ function isToday(date) {
            date.getFullYear() === today.getFullYear();
 }
 
-export const addTaco = async (userToAddTaco, UserSentTaco) => {
+export const addTaco = async (userToAddTaco: string, UserSentTaco: string): Promise<TacoCounter | undefined> => {
     // TODO CHECK IF DIFF USERS
 
     // console.log(`adding taco to user ${userToAddTaco}, from ${UserSentTaco}`);
@@ -21,13 +19,16 @@ export const addTaco = async (userToAddTaco, UserSentTaco) => {
     if(isToday(tacoCounterSender.last_day_sent_tacos) && tacoCounterSender.tacos_sent_today >= tacoCounterSender.max_tacos_per_day){
         console.log('You have no more tacos to send today you dummy');
         // TODO add ephemeral msg so user knows
-        return false;
+        return undefined;
     }
     
-    await tacoCounterSender.update({tacos_sent_today: tacoCounterSender.tacos_sent_today + 1, last_day_sent_tacos: new Date()});
+    await tacoCounterSender.update({
+        tacos_sent_today: BigInt(BigInt(tacoCounterSender.tacos_sent_today) + BigInt(1)), 
+        last_day_sent_tacos: new Date(),
+    });
 
     const [ tacoCounterReceiver ] = await TacoCounter.findOrCreate({where: {user_id: userToAddTaco}});
-    await tacoCounterReceiver.update({tacos_received: tacoCounterReceiver.tacos_received + 1});
+    await tacoCounterReceiver.update({tacos_received: BigInt(BigInt(tacoCounterReceiver.tacos_received) + BigInt(1))});
 
-    return true;
+    return tacoCounterReceiver;
 }

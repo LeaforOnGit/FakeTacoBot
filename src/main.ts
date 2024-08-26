@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { Client, GatewayIntentBits } from 'discord.js';
-import { onMessageCreate } from './events/onMessageCreate.js';
+import { onMessageCreate } from './events/onMessageCreate';
 
 dotenv.config();
 
@@ -22,6 +22,3 @@ client.on("ready", () => console.log("Bot ready"));
 
 client.on("messageCreate", async (message) => await onMessageCreate(message));
 
-/**
- * TODO: 
- */
