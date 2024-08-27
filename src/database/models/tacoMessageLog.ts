@@ -1,10 +1,19 @@
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
-import { sequelize } from "../database";
+import {
+    CreationOptional,
+    DataTypes,
+    InferAttributes,
+    InferCreationAttributes,
+    Model,
+} from 'sequelize';
+import { sequelize } from '../database';
 
-export class TacoMessageLog extends Model<InferAttributes<TacoMessageLog>, InferCreationAttributes<TacoMessageLog>> {
+export class TacoMessageLog extends Model<
+    InferAttributes<TacoMessageLog>,
+    InferCreationAttributes<TacoMessageLog>
+> {
     declare id: CreationOptional<number>;
     declare sender_id: string;
-    declare receiver_id: string;
+    declare receiver_id: string; // not clear naming, if its a messageLog, who is receiving it?
     declare message_content: string;
 }
 
@@ -30,8 +39,6 @@ TacoMessageLog.init(
     },
     {
         sequelize,
-        tableName: 'tacoMessageLogs'
+        tableName: 'tacoMessageLogs',
     },
-)
-
-
+);
