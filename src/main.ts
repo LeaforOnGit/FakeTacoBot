@@ -10,15 +10,14 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.MessageContent
-    ]
+        GatewayIntentBits.MessageContent,
+    ],
 });
 
 client.login(process.env.DISCORD_TOKEN);
 
-console.log("Bot running");
+console.log('Bot running');
 
-client.on("ready", () => console.log("Bot ready"));
+client.on('ready', () => console.log('Bot ready'));
 
-client.on("messageCreate", async (message) => await onMessageCreate(message));
-
+client.on('messageCreate', async (message) => onMessageCreate(message));
