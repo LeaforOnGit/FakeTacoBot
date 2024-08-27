@@ -1,11 +1,20 @@
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
-import { sequelize } from "../database";
+import {
+    CreationOptional,
+    DataTypes,
+    InferAttributes,
+    InferCreationAttributes,
+    Model,
+} from 'sequelize';
+import { sequelize } from '../database';
 
-export class ShopItem extends Model<InferAttributes<ShopItem>, InferCreationAttributes<ShopItem>> {
+export class ShopItem extends Model<
+    InferAttributes<ShopItem>,
+    InferCreationAttributes<ShopItem>
+> {
     declare id: CreationOptional<number>;
     declare name: string;
-    declare receiver_id: bigint;
-    declare message_content: bigint;
+    declare price: number;
+    declare sell_limit: number; // should be "count"
 }
 
 ShopItem.init(
@@ -30,9 +39,6 @@ ShopItem.init(
     },
     {
         sequelize,
-        tableName: 'shopItems'
+        tableName: 'shopItems',
     },
-)
-
-
-
+);

@@ -1,10 +1,19 @@
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
-import { sequelize } from "../database";
+import {
+    CreationOptional,
+    DataTypes,
+    InferAttributes,
+    InferCreationAttributes,
+    Model,
+} from 'sequelize';
+import { sequelize } from '../database';
 
-export class UserStatus extends Model<InferAttributes<UserStatus>, InferCreationAttributes<UserStatus>> {
+export class UserStatus extends Model<
+    InferAttributes<UserStatus>,
+    InferCreationAttributes<UserStatus>
+> {
     declare user_id: string;
-    declare status: string;
-    declare obs: CreationOptional<string>;
+    declare status: string; // what is this
+    declare obs: CreationOptional<string>; // what is this
 }
 
 UserStatus.init(
@@ -24,8 +33,6 @@ UserStatus.init(
     },
     {
         sequelize,
-        tableName: 'userStatuses'
+        tableName: 'userStatuses',
     },
-)
-
-
+);

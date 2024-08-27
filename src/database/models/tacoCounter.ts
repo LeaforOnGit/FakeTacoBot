@@ -1,12 +1,22 @@
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
-import { sequelize } from "../database";
+import {
+    CreationOptional,
+    DataTypes,
+    InferAttributes,
+    InferCreationAttributes,
+    Model,
+} from 'sequelize';
+import { sequelize } from '../database';
 
-export class TacoCounter extends Model<InferAttributes<TacoCounter>, InferCreationAttributes<TacoCounter>> {
+export class TacoCounter extends Model<
+    InferAttributes<TacoCounter>,
+    InferCreationAttributes<TacoCounter>
+> {
+    // this is not normalized, each taco sent should have its own DB row
     declare user_id: string;
-    declare tacos_received: CreationOptional<bigint>;
-    declare tacos_sent_today: CreationOptional<bigint>;
+    declare tacos_received: CreationOptional<number>;
+    declare tacos_sent_today: CreationOptional<number>;
     declare last_day_sent_tacos: Date;
-    declare max_tacos_per_day: CreationOptional<bigint>;
+    declare max_tacos_per_day: CreationOptional<number>;
 }
 
 TacoCounter.init(
@@ -34,8 +44,6 @@ TacoCounter.init(
     },
     {
         sequelize,
-        tableName: 'tacoCounters'
+        tableName: 'tacoCounters',
     },
-)
-
-
+);
